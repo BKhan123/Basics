@@ -1,0 +1,59 @@
+using System;
+
+//Abstract Class.
+public abstract class BaseEmployee
+{
+    public int ID { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public string GetFullName()
+    {
+        return this.FirstName + " " + LastName;
+    }
+    //Declaring the Abstract method; and the same will be overriden in the the derived class.
+    public abstract int GetMonthlySalary();
+}
+//Abstract Class inherits another abstract class. Since abstact class so no need to mention all the base class abstract method.
+//It can have its own method.
+public abstract class FullTimeEmployee :BaseEmployee
+{
+    public int AnnualSalary { get; set; }
+    public int GetMonthly()
+    {
+        return this.AnnualSalary / 12;
+    }
+}
+
+//Non- abstract class hence all the abstract method from the base class has to be specified.
+public class ContractEmployee : FullTimeEmployee
+{
+    public int HourlyPay { get; set; }
+    public int TotalHoursWorked { get; set; }
+    public override int GetMonthlySalary()
+    {
+        return this.HourlyPay * this.TotalHoursWorked;
+    }
+}
+
+
+public class Employee
+{
+    public static void Main()
+    {
+        
+        ContractEmployee cte = new ContractEmployee()
+        {
+            ID = 102,
+            FirstName = "Sam",
+            LastName = "Brooks",
+            HourlyPay = 100,
+            TotalHoursWorked = 40
+        };
+
+        Console.WriteLine(cte.GetFullName());
+        //It is not mandatory to call the abstract methods if we want we can skip it too.
+        Console.WriteLine(cte.GetMonthlySalary());
+        Console.WriteLine(cte.GetMonthly());
+    }
+}
