@@ -1,0 +1,49 @@
+using System;
+class Student
+{
+	public void StudentID()
+	{
+		Console.WriteLine("Student ID is 1.");
+	}
+	public virtual void StudentName()
+	{
+		Console.WriteLine("Student Name is Base.");
+	}
+}
+class Teacher : Student
+{
+	public new void StudentID()
+	{
+		Console.WriteLine("Student ID is 2.");
+	}
+	public override void StudentName()
+	{
+		Console.WriteLine("Student ID is Derived.");
+	}
+}
+class Program
+{
+	static void Main(string[] args)
+	{
+		//Below code is executed if we want our output only from Base class.
+		Student s = new Student();
+		s.StudentID();
+		s.StudentName();
+
+		//The below three lines of code is used when we want our few methods to perform like Base Class and few like Derived class (override).
+		//here Derived Class has Base Class reference so it will check for the Base Class methods only.
+		Student t = new Teacher();
+		//StudentID has new keyword in Derived class but since we are refernceing the Base class so the output will be from the base class.
+		t.StudentID();
+		//StudentName has virtual keyword in Base class hence it will check the overriden method in the Derived class.
+		t.StudentName();
+		
+
+		//Below code is executed if we want our output only from Derived class.
+		Teacher tt = new Teacher();
+		tt.StudentID();
+		tt.StudentName();
+
+
+	}
+}
